@@ -1,0 +1,39 @@
+{
+  "manifest_version": 2,
+
+  "name": "Neopets DreamTheme",
+  "description": "Allows you to use any of the official Neopets themes without having to unlock them.",
+  "version": "1.0",
+
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+
+  "background": {
+    "scripts": [
+      "js/jquery.js",
+      "js/background.js"
+    ]
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.neopets.com/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+
+  "browser_action": {
+    "default_icon": "img/alc.png",
+    "default_title": "Neopets DreamTheme",
+    "default_popup": "popup.html"
+  }
+}
