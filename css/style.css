@@ -1,0 +1,60 @@
+body {
+  color: #666;
+  font: 14px 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+
+.header {
+  text-align: center;
+}
+
+h1 {
+  color: #777;
+  font: 36px 'Oswald', sans-serif;
+  text-transform: uppercase;
+}
+
+.emphasis {
+  color: #999;
+}
+
+.sub {
+  margin: 5px;
+  font-size: 12px;
+}
+
+#current, .selected {
+  font-weight: 700;
+}
+
+#current .thumbnail {
+  display: block;
+  float: none;
+  margin: 0 auto;
+}
+
+#themes {
+  width: 265px;
+  height: 350px;
+  margin: 15px auto 0;
+  padding-bottom: 10px;
+  overflow: auto;
+}
+
+#themes li {
+  width: 230px;
+  padding: 5px 10px;
+  list-style: none;
+}
+
+#themes li:hover {
+  background-color: #f6f6f6;
+  color: #333;
+}
+
+.thumbnail {
+  width: 20px;
+  height: 20px;
+  float: left;
+  padding: 0px 8px;
+}
