@@ -33,6 +33,14 @@ h1 {
   margin: 0 auto;
 }
 
+.nopref {
+  display: block;
+  width: 12px;
+  height: 9px;
+  margin: 0 auto 10px;
+  border-bottom: 1px solid #777;
+}
+
 #themes {
   width: 265px;
   height: 350px;
