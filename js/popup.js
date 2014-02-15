@@ -29,8 +29,10 @@ chrome.storage.local.get(key, function (result) {
   $.getJSON("data/themes.json", function(themes) {
     var list = "";
     $.each(themes, function(name, id) {
-      list += "<li id='" + id + "'><img src='http://images.neopets.com/themes/" +
-      id + "/events/trade_offer.png' class='thumbnail'>" + name + "</li>";
+      var url = chrome.extension.getURL(
+          "img/themes/" + id + "/events/trade_offer.png");
+      list += ("<li id='" + id + "'><img src='" + url +
+          "' class='thumbnail'>" + name + "</li>");
     });
     $("#themes").html(list);
 
