@@ -23,14 +23,30 @@ h1 {
   font-size: 12px;
 }
 
-#current, .selected {
+.wrapper {
+  position: relative;
+  height: 40px;
+}
+
+.label {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+}
+
+.label, .selected {
   font-weight: 700;
 }
 
-#current .thumbnail {
+.label .thumbnail {
   display: block;
   float: none;
   margin: 0 auto;
+}
+
+#next {
+  left: 100%;
 }
 
 .nopref {

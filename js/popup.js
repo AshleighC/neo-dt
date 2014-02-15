@@ -1,10 +1,28 @@
 var key = "neo-dt";
 
-var select = function(id) {
+var select = function(id, animate) {
   var theme = $("#" + id);
   $("#themes li").not(theme).removeClass("selected");
   theme.addClass("selected");
-  $("#current").html(theme.html());
+
+  if (animate) {
+    var current = $("#current");
+    var next = $("#next");
+    current.animate({"left": "-100%"}, {
+      "start": function() {
+        next.html(theme.html());
+        next.animate({"left": 0});
+      },
+      "complete": function() {
+        current.html(next.html());
+        current.css("left", 0);
+        next.html("");
+        next.css("left", "100%");
+      }
+    });
+  } else {
+    $("#current").html(theme.html());
+  }
 };
 
 chrome.storage.local.get(key, function (result) {
@@ -17,13 +35,13 @@ chrome.storage.local.get(key, function (result) {
     $("#themes").html(list);
 
     if (!$.isEmptyObject(result)) {
-      select(result[key]);
+      select(result[key], false);
     }
 
     $("#themes li").click(function() {
       var change = {};
       var id = $(this).attr("id");
-      select(id);
+      select(id, true);
       change[key] = id;
       chrome.storage.local.set(change);
     });
