@@ -95,7 +95,19 @@ do
 
   cd ..
 
-  # TODO: Get footer images
+  mkdir rotations
+  cd rotations
+
+  rotation=1
+  url=`echo $base$d/rotations/`
+
+  while wget --spider -q $url$rotation.png
+  do
+    wget -q $url$rotation.png
+    let rotation=rotation+1
+  done
+
+  cd ..
 
   cd ..
 done
