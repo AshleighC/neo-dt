@@ -69,6 +69,7 @@ h1 {
   width: 230px;
   padding: 5px 10px;
   list-style: none;
+  transition: all 0.33s linear;
 }
 
 #themes li:hover {
