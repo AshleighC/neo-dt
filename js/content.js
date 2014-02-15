@@ -1,14 +1,29 @@
 var key = "neo-dt";
 var regex = /[0-9]{3}_[a-z0-9]*_[a-z0-9]{5}/;
 
+var random = Math.random();
+var rotations;
+
+$.getJSON(chrome.extension.getURL("data/rotations.json"), function(data) {
+  rotations = data;
+});
+
+var fixSrc = function(img, theme, path) {
+  img.attr("src", chrome.extension.getURL("img/themes/" + theme + path));
+};
+
 var fixImages = function(theme) {
   var eventIcon = $(".eventIcon img");
-  eventIcon.attr("src", eventIcon.attr("src").replace(regex, theme));
-  $.getJSON(chrome.extension.getURL("data/rotations.json"), function(values) {
-    var i = Math.floor(Math.random() * (values[theme])) + 1;
-    $(".footerNifty").attr("src", chrome.extension.getURL(
-        "img/themes/" + theme + "/rotations/" + i + ".png"));
-  });
+  var url = eventIcon.attr("src");
+  if (url) {
+    fixSrc(eventIcon, theme, "/events" + url.substring(url.lastIndexOf("/")));
+  }
+
+  var footerImg = $(".footerNifty");
+  if (rotations && footerImg.attr("src")) {
+    rotation = Math.floor(random * rotations[theme]) + 1;
+    fixSrc(footerImg, theme, "/rotations/" + rotation + ".png");
+  }
 };
 
 document.addEventListener("DOMNodeInserted", function(ev) {
