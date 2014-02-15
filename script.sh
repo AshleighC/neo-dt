@@ -63,6 +63,9 @@ declare -A subs=(
 base="http://images.neopets.com/themes/"
 counter=0
 
+rotations=$(pwd)/data/rotations.json
+echo "{" > $rotations
+
 cd img/themes/
 rm -rf 0*
 
@@ -107,9 +110,16 @@ do
     let rotation=rotation+1
   done
 
+  let rotation=rotation-1
+  echo "  \"$d\": $rotation," >> $rotations
+
   cd ..
 
   cd ..
 done
+
+echo "}" >> $rotations
+tac $rotations | sed '/,/ {s///; :loop; n; b loop}' | tac > temp
+mv temp $rotations
 
 cd ../../..
