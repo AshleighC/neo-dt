@@ -1,7 +1,10 @@
 var key = "neo-dt";
 
 var setIcon = function(tabId, themeId) {
-  var details = {"tabId": tabId, "path": "img/" + themeId + ".png"};
+  var details = {
+    "tabId": tabId,
+    "path": "img/themes/" + themeId + "/events/trade_offer.png"
+  };
   chrome.pageAction.setIcon(details);
 };
 
