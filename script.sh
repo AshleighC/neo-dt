@@ -88,7 +88,7 @@ do
       then
         wget -q $base${directories[0]}/events/$e.png
       else
-        wget -q -O $e$png $base$d/events/${subs[$e]}.png
+        wget -q -O $e.png $base$d/events/${subs[$e]}.png
       fi
     fi
   done
