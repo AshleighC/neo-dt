@@ -35,5 +35,10 @@
     "default_icon": "img/alc.png",
     "default_title": "Neopets DreamTheme",
     "default_popup": "popup.html"
-  }
+  },
+
+  "web_accessible_resources": [
+    "data/rotations.json",
+    "img/themes/*"
+  ]
 }

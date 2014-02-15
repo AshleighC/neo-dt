@@ -4,7 +4,11 @@ var regex = /[0-9]{3}_[a-z0-9]*_[a-z0-9]{5}/;
 var fixImages = function(theme) {
   var eventIcon = $(".eventIcon img");
   eventIcon.attr("src", eventIcon.attr("src").replace(regex, theme));
- /* TODO: Fix footer images. */
+  $.getJSON(chrome.extension.getURL("data/rotations.json"), function(values) {
+    var i = Math.floor(Math.random() * (values[theme])) + 1;
+    $(".footerNifty").attr("src", chrome.extension.getURL(
+        "img/themes/" + theme + "/rotations/" + i + ".png"));
+  });
 };
 
 document.addEventListener("DOMNodeInserted", function(ev) {
