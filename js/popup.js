@@ -1,4 +1,5 @@
 var key = "neo-dt";
+var theme;
 
 var select = function(id, animate) {
   var theme = $("#" + id);
@@ -37,15 +38,21 @@ chrome.storage.local.get(key, function (result) {
     $("#themes").html(list);
 
     if (!$.isEmptyObject(result)) {
-      select(result[key], false);
+      theme = result[key];
+      select(theme, false);
     }
 
     $("#themes li").click(function() {
-      var change = {};
       var id = $(this).attr("id");
-      select(id, true);
-      change[key] = id;
-      chrome.storage.local.set(change);
+
+      if (id != theme) {
+        theme = id;
+        select(theme, true);
+
+        var change = {};
+        change[key] = theme;
+        chrome.storage.local.set(change);
+      }
     });
   });
 });
