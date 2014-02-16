@@ -68,6 +68,7 @@ h1 {
 #themes li {
   width: 230px;
   padding: 5px 10px;
+  cursor: pointer;
   list-style: none;
   transition: all 0.33s linear;
 }
