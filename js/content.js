@@ -1,13 +1,22 @@
 var key = "neo-dt";
-var regex = /[0-9]{3}_[a-z0-9]*_[a-z0-9]{5}/;
+var regex = /http:\/\/images\.neopets\.com\/css\/themes\/.{0,20}\.css/g;
 
 var themeId;
+var css;
+var random;
+
+var setVars = function(theme, newRand) {
+  themeId = theme;
+  css = chrome.extension.getURL("css/themes/" + theme + ".css");
+  if (newRand) {
+    random = Math.random();
+  }
+};
 
 chrome.storage.local.get(key, function (result) {
-  themeId = result[key];
+  setVars(result[key]);
 });
 
-var random = Math.random();
 var rotations;
 
 $.getJSON(chrome.extension.getURL("data/rotations.json"), function(data) {
@@ -37,10 +46,10 @@ var fixImages = function() {
 
 var imageInterval = setInterval(fixImages, 100);
 
-var replaceInnerHTML = function(node, theme) {
+var replaceInnerHTML = function(node) {
   var html = node.innerHTML;
-  if (theme && html.indexOf(theme) == -1) {
-    node.innerHTML = node.innerHTML.replace(regex, theme);
+  if (css && themeId && html.indexOf(themeId) == -1) {
+    node.innerHTML = html.replace(regex, css);
   }
 };
 
@@ -50,10 +59,11 @@ document.addEventListener("DOMNodeInserted", function(ev) {
   var html = node.innerHTML;
   if ((node.localName == "head") && (html.indexOf("/themes/") != -1)) {
     if (themeId) {
-      replaceInnerHTML(node, themeId);
+      replaceInnerHTML(node);
     } else {
       chrome.storage.local.get(key, function(result) {
-        replaceInnerHTML(node, result[key]);
+        setVars(result[key]);
+        replaceInnerHTML(node);
       });
     }
   }
@@ -64,12 +74,11 @@ $(document).ready(function() {
 });
 
 chrome.runtime.onMessage.addListener(function(theme, sender, sendResponse) {
-  themeId = theme;
-  random = Math.random();
+  setVars(theme, true);
   $("link").each(function(i, stylesheet) {
     var url = $(stylesheet).attr("href");
     if (url && url.indexOf("themes") > 0) {
-      $(stylesheet).attr("href", url.replace(regex, theme));
+      $(stylesheet).attr("href", css);
     }
     fixImages();
   });

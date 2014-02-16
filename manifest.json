@@ -39,6 +39,7 @@
 
   "web_accessible_resources": [
     "data/rotations.json",
-    "img/themes/*"
+    "img/themes/*",
+    "css/themes/*"
   ]
 }
