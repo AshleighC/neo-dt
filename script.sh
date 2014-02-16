@@ -66,6 +66,8 @@ counter=0
 rotations=$(pwd)/data/rotations.json
 echo "{" > $rotations
 
+backgrounds=( banner header footer )
+
 cd img/themes/
 rm -rf 0*
 
@@ -82,7 +84,7 @@ do
 
   for e in ${events[@]}
   do
-    url=`echo $base$d/events/$e.png`
+    url=$base$d/events/$e.png
     if wget --spider -q $url
     then
       wget -q $url
@@ -102,7 +104,7 @@ do
   cd rotations
 
   rotation=1
-  url=`echo $base$d/rotations/`
+  url=$base$d/rotations/
 
   while wget --spider -q $url$rotation.png
   do
@@ -112,6 +114,16 @@ do
 
   let rotation=rotation-1
   echo "  \"$d\": $rotation," >> $rotations
+
+  cd ..
+
+  mkdir backgrounds
+  cd backgrounds
+
+  for background in ${backgrounds[@]}
+  do
+    wget -q $base$d/$background"_bg.png"
+  done
 
   cd ..
 
