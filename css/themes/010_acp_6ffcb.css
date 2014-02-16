@@ -1,0 +1,367 @@
+/*
+  * Theme-Specific Style Sheet
+  *
+  * Theme: 3
+  * 	Haunted Woods
+  * 	Dark and foreboding.  WOOOOOoooooo...
+*/
+
+
+/********************************************************************/
+/* HTML Tag Styles **************************************************/
+/********************************************************************/
+
+	BODY {
+		background-color: #CBCBBC;
+	}
+
+	A:Link, A:Visited {
+		color: #2E72C0;
+	}
+
+	A:Hover {
+		color: #CD9800;
+	}
+
+/********************************************************************/
+/* Foundation IDs ***************************************************/
+/********************************************************************/
+
+	#main {
+		border-left: 2px solid #747474;
+		border-right: 2px solid #747474;
+	}
+
+	#header {
+		background-color: #C0DDF9;
+		background-image: url("chrome-extension://__MSG_@@extension_id__/img/themes/010_acp_6ffcb/backgrounds/header_bg.png");
+	}
+
+	#footer {
+		background-color: #818063;
+		background-image: url("chrome-extension://__MSG_@@extension_id__/img/themes/010_acp_6ffcb/backgrounds/footer_bg.png");
+	}
+
+
+/********************************************************************/
+/* Header Stuff *****************************************************/
+/********************************************************************/
+
+/* Navigation.  Duh.  */
+	ul.dropdown {
+		border: 1px solid #6F4B1A;
+		background-color: #FFF7C4;
+	}
+
+	LI:hover UL.dropdown A, LI.over UL.dropdown A {
+		color: #000000;
+	}
+
+	LI:hover UL.dropdown A:Hover, LI.over UL.dropdown A:hover {
+		color: #CD9800;
+	}
+
+/* Event Icons */
+	.eventIcon, .user {
+		color: #000000;
+	}
+
+	.eventIcon A:Link, .eventIcon A:Hover, .eventIcon A:Visited,
+	.user A:Link, .user A:Hover, .user A:Visited {
+		color: #2968AD;
+	}
+
+/* Clock */
+	#nst {
+		color: #000000;
+	}
+
+
+/********************************************************************/
+/* Sidebar Classes **************************************************/
+/********************************************************************/
+
+	.sidebarModule {
+		border: 2px solid #E4E4E4;
+	}
+
+	.sidebarTable {
+		border: 2px solid #C9C9C9;
+	}
+
+	.sidebarHeader {
+		background-color: #72BCF7;
+		border-bottom: 2px solid #C9C9C9;
+	}
+
+	.sidebarHeader A:Link, .sidebarHeader A:Hover, .sidebarHeader A:Visited {
+		color: #000000;
+	}
+
+
+/********************************************************************/
+/* Content Classes **************************************************/
+/********************************************************************/
+
+/* We need a few styles to make a module work */
+	.contentModuleHeader {
+		background-color: #000000;
+		color: #FFFFFF;
+	}
+
+	.contentModuleHeader A:Link, .contentModuleHeader A:Hover, .contentModuleHeader A:Visited {
+		color: #C5C5C5;
+	}
+
+	.moreLink {
+		border: 1px solid #8F8F8F;
+	}
+
+	.contentModuleHeaderAlt {
+		background-color: #3784F9;
+		color: #FFFFFF;
+	}
+
+	.contentModuleHeaderAlt A:Link, .contentModuleHeaderAlt A:Hover, .contentModuleHeaderAlt A:Visited {
+		color: #B9D5FD;
+	}
+
+	.moreLinkAlt {
+		border: 1px solid #7DAFFB;
+	}
+
+/********************************************************************/
+/*  Rounded Module Classes ******************************************/
+/********************************************************************/
+	/* styles for dark colored rounded modules in gamesroom */
+	.rcModuleHeader, .rcModuleHeader a, .rcModuleHeader a:hover, .rcModuleHeader a:visited, .rcModuleHeader a:link {
+		color: #FFFFFF;
+	}
+
+	.gamesRoomDarkModule .rcModuleContent {
+		border-color: #164387;
+	}
+
+	.gamesRoomDarkModule .rcModuleContentOuter {
+		border-color: #CAD6E7;
+	}
+
+	.gamesRoomDarkModule .rcModuleHeader, .gamesRoomDarkModule .rcModuleTopLeft,
+	.gamesRoomDarkModule .rcModuleTopRight {
+		background-color: #164387;
+	}
+
+	.gamesRoomDarkModule .rcModuleBottomLeft {
+		background: transparent url('http://images.neopets.com/themes/010_acp_6ffcb/games/bot_left_corner_dark.png') no-repeat top left;
+		_background: none;
+		_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://images.neopets.com/themes/010_acp_6ffcb/games/bot_left_corner_dark.png',sizingMethod='scale');
+	}
+
+	.gamesRoomDarkModule .rcModuleBottomRight {
+		background: transparent url('http://images.neopets.com/themes/010_acp_6ffcb/games/bot_right_corner_dark.png') no-repeat top right;
+		_background: none;
+		_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://images.neopets.com/themes/010_acp_6ffcb/games/bot_right_corner_dark.png',sizingMethod='scale');
+	}
+
+	.gamesRoomDarkModule .rcModuleTopLeft,  .gamesRoomDarkModule .rcModuleTopRight {
+		_background:none;
+	}
+
+	/* styles for light colored rounded modules in gamesroom */
+	.rcModuleHeader, .rcModuleHeader a, .rcModuleHeader a:link, .rcModuleHeader a:hover .rcModuleHeader a:visited {
+		color: #FFFFFF;
+		text-decoration:none;
+	}
+
+	.gamesRoomLiteModule .rcModuleContent {
+		border-color: #3784F9;
+	}
+
+	.gamesRoomLiteModule .rcModuleContentOuter {
+		border-color: #CAD6E7;
+	}
+
+	.gamesRoomLiteModule .rcModuleHeader, .gamesRoomLiteModule .rcModuleTopLeft,
+	.gamesRoomLiteModule .rcModuleTopRight {
+		background-color: #3784F9;
+	}
+
+	.gamesRoomLiteModule .rcModuleBottomLeft {
+		background: transparent url('http://images.neopets.com/themes/010_acp_6ffcb/games/bot_left_corner_lite.png') no-repeat top left;
+		_background: none;
+		_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://images.neopets.com/themes/010_acp_6ffcb/games/bot_left_corner_lite.png',sizingMethod='scale');
+	}
+
+	.gamesRoomLiteModule .rcModuleBottomRight {
+		background: transparent url('http://images.neopets.com/themes/010_acp_6ffcb/games/bot_right_corner_lite.png') no-repeat top right;
+		_background: none;
+		_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://images.neopets.com/themes/010_acp_6ffcb/games/bot_right_corner_lite.png',sizingMethod='scale');
+	}
+
+	.gamesRoomLiteModule .rcModuleTopLeft,  .gamesRoomLiteModule .rcModuleTopRight {
+		_background:none;
+	}
+	
+	/* games room tabs on category page */
+	.gamesRoomCategoryList .rcNavTab {
+		background-color:#3784F9;
+	}
+	.gamesRoomCategoryList .rcSelectedTab {
+		background-color:#164387;
+	}
+
+	a #carouselPrev {
+		background: transparent url('http://images.neopets.com/themes/010_acp_6ffcb/games/btn_back_arrow.png') no-repeat top right;
+		_background: none;
+		_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://images.neopets.com/themes/010_acp_6ffcb/games/btn_back_arrow.png',sizingMethod='scale');
+
+	}
+
+	a #carouselNext {
+		background: transparent url('http://images.neopets.com/themes/010_acp_6ffcb/games/btn_next_arrow.png') no-repeat top right;
+		_background: none;
+		_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://images.neopets.com/themes/010_acp_6ffcb/games/btn_next_arrow.png',sizingMethod='scale');
+	}
+
+	a:hover #carouselPrev {
+		background: transparent url('http://images.neopets.com/themes/010_acp_6ffcb/games/btn_back_arrow_ov.png') no-repeat top right;
+		cursor:pointer;
+		_background: none;
+		_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://images.neopets.com/themes/010_acp_6ffcb/games/btn_back_arrow_ov.png',sizingMethod='scale');
+
+	}
+
+	a:hover #carouselNext {
+		background: transparent url('http://images.neopets.com/themes/010_acp_6ffcb/games/btn_next_arrow_ov.png') no-repeat top right;
+		cursor:pointer;
+		_background: none;
+		_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://images.neopets.com/themes/010_acp_6ffcb/games/btn_next_arrow_ov.png',sizingMethod='scale');
+
+	}
+	
+
+    .gamesBtn .btnLeft {
+		background: transparent url('http://images.neopets.com/themes/010_acp_6ffcb/games/btn_left_sel.png') no-repeat top left;
+		_background: none;
+		 _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://images.neopets.com/themes/010_acp_6ffcb/games/btn_left_sel.png',sizingMethod='scale');
+	}
+
+	.gamesBtn .btnRight {
+		background: transparent url('http://images.neopets.com/themes/010_acp_6ffcb/games/btn_right_sel.png') no-repeat top left;
+		_background: none;
+		_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://images.neopets.com/themes/010_acp_6ffcb/games/btn_right_sel.png',sizingMethod='scale');
+	}
+
+	.gamesBtn .btnCenter {
+		background: transparent url('http://images.neopets.com/themes/010_acp_6ffcb/games/btn_center_sel.png') no-repeat top left;
+		_background: none;
+		_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://images.neopets.com/themes/010_acp_6ffcb/games/btn_center_sel.png',sizingMethod='scale');
+	}
+
+	.gamesBtn a .btnLeft {
+		background: transparent url('http://images.neopets.com/themes/010_acp_6ffcb/games/btn_left.png') no-repeat top left;
+		_background: none;
+		_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://images.neopets.com/themes/010_acp_6ffcb/games/btn_left.png',sizingMethod='scale');
+	}
+
+	.gamesBtn a .btnRight {
+		background: transparent url('http://images.neopets.com/themes/010_acp_6ffcb/games/btn_right.png') no-repeat top left;
+		_background: none;
+		_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://images.neopets.com/themes/010_acp_6ffcb/games/btn_right.png',sizingMethod='scale');
+	}
+
+	.gamesBtn a .btnCenter {
+		 background: transparent url('http://images.neopets.com/themes/010_acp_6ffcb/games/btn_center.png') no-repeat top left;
+		 _background: none;
+		_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://images.neopets.com/themes/010_acp_6ffcb/games/btn_center.png',sizingMethod='scale');
+	}
+
+	.gamesBtn a, .gamesBtn a:link, .gamesBtn a:hover, .gamesBtn a:visited {
+		color:#ffffff;
+	}
+
+	.gamesBtn  a:hover .btnLeft {
+		background: transparent url('http://images.neopets.com/themes/010_acp_6ffcb/games/btn_left_ov.png') no-repeat top left;
+		_background: none;
+		_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://images.neopets.com/themes/010_acp_6ffcb/games/btn_left_ov.png',sizingMethod='scale');
+	}
+
+	.gamesBtn  a:hover .btnRight {
+		background: transparent url('http://images.neopets.com/themes/010_acp_6ffcb/games/btn_right_ov.png') no-repeat top left;
+		_background: none;
+		_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://images.neopets.com/themes/010_acp_6ffcb/games/btn_right_ov.png',sizingMethod='scale');
+	}
+
+	.gamesBtn a:hover .btnCenter {
+		background: transparent url('http://images.neopets.com/themes/010_acp_6ffcb/games/btn_center_ov.png') no-repeat top left;
+		_background: none;
+		_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://images.neopets.com/themes/010_acp_6ffcb/games/btn_center_ov.png',sizingMethod='scale');
+	}
+	
+	.showAllWrap .rcModuleContent {
+		background: transparent url('http://images.neopets.com/themes/010_acp_6ffcb/games/showallbg.jpg') no-repeat top left;
+	}
+
+	#showAllSorting  {
+		color:#ffffff;
+	}
+
+	.category {
+		background-color:#164387;
+		color:#ffffff;
+	}
+
+/********************************************************************/
+/* Footer Classes ***************************************************/
+/********************************************************************/
+
+	.footerForm {
+		color: #FFFFFF;
+	}
+
+	.copyright, .copyright A:Link, .copyright A:Hover, .copyright A:Visited {
+		color: #1B1B1B;
+	}
+
+
+/********************************************************************/
+/* Misc Classes of Doom *********************************************/
+/********************************************************************/
+
+/* Ad banners.  No comment */
+	#ban {
+		background-color: #747474;
+		background-image: url("chrome-extension://__MSG_@@extension_id__/img/themes/010_acp_6ffcb/backgrounds/banner_bg.png");
+	}
+
+	.marqueeSlot, .marqueeSlot A:Link, .marqueeSlot A:Hover, .marqueeSlot A:Visited {
+		background-color: #73A9FB;
+		color: #FFFFFF;
+	}
+
+	.marqueeSlotOn, .marqueeSlotOn A:Link, .marqueeSlotOn A:Hover, .marqueeSlotOn A:Visited {
+		background-color: #3784F9;
+		color: #FFFFFF;
+	}
+		
+/********************************************************************/
+/* MAMABAR Classes **************************************************/
+/********************************************************************/
+
+ul.brand-mamabar-list a {
+	display: block;
+	line-height: 18px;
+	color: #9a9a9a;
+	font-size: 11px;
+	text-decoration: none;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+ul.brand-mamabar-list a:hover { text-decoration: underline; }
+
+/* ACTIVE STATE */
+ul.brand-mamabar-list a.brand-mamabar-active {
+	color: #2E72C0;
+	cursor: default;
+}

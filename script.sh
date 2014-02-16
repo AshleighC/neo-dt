@@ -60,13 +60,18 @@ declare -A subs=(
   ["trade_withdraw"]="trade_reject"
 )
 
+ext="chrome-extension://__MSG_@@extension_id__"
 base="http://images.neopets.com/themes/"
 counter=0
 
 rotations=$(pwd)/data/rotations.json
 echo "{" > $rotations
 
-backgrounds=( banner header footer )
+backgrounds=(
+  banner_bg.png
+  header_bg.png
+  footer_bg.png
+)
 
 cd img/themes/
 rm -rf 0*
@@ -77,7 +82,7 @@ do
   cd $d
 
   let counter=counter+1
-  echo "($counter) Downloading $d..."
+  echo "($counter) Downloading images for $d..."
 
   mkdir events
   cd events
@@ -120,9 +125,9 @@ do
   mkdir backgrounds
   cd backgrounds
 
-  for background in ${backgrounds[@]}
+  for b in ${backgrounds[@]}
   do
-    wget -q $base$d/$background"_bg.png"
+    wget -q $base$d/$b
   done
 
   cd ..
@@ -133,5 +138,23 @@ done
 echo "}" >> $rotations
 tac $rotations | sed '/,/ {s///; :loop; n; b loop}' | tac > temp
 mv temp $rotations
+
+cd ../../..
+
+cd css/themes
+rm -rf 0*
+
+for d in ${directories[@]}
+do
+  let counter=counter+1
+  echo "($counter) Downloading css for $d..."
+  wget -q "http://images.neopets.com/css/themes/"$d.css
+
+  for b in ${backgrounds[@]}
+  do
+    sed "s,$base$d/$b,$ext/img/themes/$d/backgrounds/$b," $d.css > temp
+    mv temp $d.css
+  done
+done
 
 cd ../../..
