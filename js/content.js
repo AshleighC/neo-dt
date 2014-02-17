@@ -23,12 +23,45 @@ $.getJSON(chrome.extension.getURL("data/rotations.json"), function(data) {
   rotations = data;
 });
 
+var fixBanner = function(animate) {
+  $("#ad-table").remove();
+
+  var banner = $("#ban");
+  var ad = $("#ad-slug-wrapper");
+
+  if (themeId.match("bir|sfp")) {
+    if (animate) {
+      banner.animate({"height": "90px"}, {
+        "start": function() {
+          ad.animate({"height": "0px"});
+        }
+      });
+    } else {
+      banner.css({"height": "90px"});
+      ad.css({"height": "0px"});
+    }
+  } else {
+    if (animate) {
+      ad.animate({"height": "90px"}, {
+        "start": function() {
+          banner.animate({"height": "94px"});
+        }
+      });
+    } else {
+      ad.css({"height": "90px"});
+      banner.css({"height": "94px"});
+    }
+  }
+};
+
 var fixSrc = function(img, theme, path) {
   img.attr("src", chrome.extension.getURL("img/themes/" + theme + path));
 };
 
-var fixImages = function() {
+var fixImages = function(animate) {
   if (themeId) {
+    fixBanner(animate);
+
     var eventIcon = $(".eventIcon img");
     var url = eventIcon.attr("src");
     if (url) {
@@ -80,6 +113,6 @@ chrome.runtime.onMessage.addListener(function(theme, sender, sendResponse) {
     if (url && url.indexOf("themes") > 0) {
       $(stylesheet).attr("href", css);
     }
-    fixImages();
+    fixImages(true);
   });
 });
