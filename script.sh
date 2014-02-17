@@ -73,6 +73,27 @@ backgrounds=(
   footer_bg.png
 )
 
+navigation=(
+  myaccount
+  customise
+  games
+  explore
+  news
+  community
+  shops
+  ncmall
+  premium
+  privacypolicy
+  divider
+  safetytips
+  contactus
+  aboutus
+  referral
+  help
+  ad-choices
+  follow-us-on
+)
+
 cd img/themes/
 rm -rf 0*
 
@@ -128,6 +149,22 @@ do
   for b in ${backgrounds[@]}
   do
     wget -q $base$d/$b
+  done
+
+  cd ..
+
+  mkdir navigation
+  cd navigation
+
+  for nav in ${navigation[@]}
+  do
+    url=$base$d/navigation/$nav.png
+    if wget --spider -q $url
+    then
+      wget -q $url
+    else
+      echo "$url not found"
+    fi
   done
 
   cd ..
