@@ -37,6 +37,12 @@
     "default_popup": "popup.html"
   },
 
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+
   "web_accessible_resources": [
     "data/rotations.json",
     "img/themes/*",
