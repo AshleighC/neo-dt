@@ -105,6 +105,8 @@ do
   let counter=counter+1
   echo "($counter) Downloading images for $d..."
 
+  wget -q $base$d/nvw.png
+
   mkdir events
   cd events
 
@@ -158,13 +160,7 @@ do
 
   for nav in ${navigation[@]}
   do
-    url=$base$d/navigation/$nav.png
-    if wget --spider -q $url
-    then
-      wget -q $url
-    else
-      echo "$url not found"
-    fi
+    wget -q $base$d/navigation/$nav.png
   done
 
   cd ..
@@ -176,7 +172,9 @@ echo "}" >> $rotations
 tac $rotations | sed '/,/ {s///; :loop; n; b loop}' | tac > temp
 mv temp $rotations
 
-cd ../../..
+cd ../..
+
+counter=0
 
 cd css/themes
 rm -rf 0*
@@ -194,4 +192,4 @@ do
   done
 done
 
-cd ../../..
+cd ../..
