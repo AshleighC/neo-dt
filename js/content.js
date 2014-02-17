@@ -8,7 +8,7 @@ var random;
 var setVars = function(theme, newRand) {
   themeId = theme;
   css = chrome.extension.getURL("css/themes/" + theme + ".css");
-  if (newRand) {
+  if (newRand || (typeof random == "undefined")) {
     random = Math.random();
   }
 };
