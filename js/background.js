@@ -6,6 +6,7 @@ var setIcon = function(tabId, themeId) {
     "path": "img/themes/" + themeId + "/events/trade_offer.png"
   };
   chrome.pageAction.setIcon(details);
+  chrome.pageAction.show(tabId);
 };
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
@@ -15,7 +16,6 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
         setIcon(tabId, result[key]);
       }
     });
-    chrome.pageAction.show(tabId);
   }
 });
 
@@ -27,4 +27,11 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
       chrome.tabs.sendMessage(tab.id, theme);
     });
   });
+});
+
+chrome.runtime.onMessage.addListener(function(message, sender) {
+  setIcon(sender.tab.id, message.theme);
+  var change = {};
+  change[key] = message.theme;
+  chrome.storage.local.set(change);
 });

@@ -1,7 +1,7 @@
 var key = "neo-dt";
 var regex = /http:\/\/images\.neopets\.com\/css\/themes\/.{0,20}\.css/g;
 
-var themeId;
+var themeId = false;
 var css;
 var random;
 
@@ -93,6 +93,9 @@ document.addEventListener("DOMNodeInserted", function(ev) {
   if ((node.localName == "head") && (html.indexOf("/themes/") != -1)) {
     if (themeId) {
       replaceInnerHTML(node);
+    } else if (themeId == undefined) {
+      var currentTheme = html.match(/[0-9]{3}_[a-z0-9]*_[a-z0-9]{5}/)[0];
+      chrome.runtime.sendMessage({"theme": currentTheme});
     } else {
       chrome.storage.local.get(key, function(result) {
         setVars(result[key]);

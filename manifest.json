@@ -32,7 +32,6 @@
   ],
 
   "page_action": {
-    "default_icon": "img/alc.png",
     "default_title": "Neopets DreamTheme",
     "default_popup": "popup.html"
   },
