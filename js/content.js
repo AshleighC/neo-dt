@@ -1,5 +1,5 @@
 var key = "neo-dt";
-var regex = /http:\/\/images\.neopets\.com\/css\/themes\/.{0,20}\.css/g;
+var regex = /[0-9]{3}_[a-z0-9]*_[a-z0-9]{5}/;
 
 var themeId = false;
 var css;
@@ -77,7 +77,7 @@ var fixImages = function(animate) {
 
     $(".nav_image img, .copyright img").each(function(i, img) {
       var url = $(img).attr("src");
-      var match = url.match(/[0-9]{3}_[a-z0-9]*_[a-z0-9]{5}/);
+      var match = url.match(regex);
       if (match) {
         fixSrc($(img), themeId, url.substr(match.index + match[0].length));
       }
@@ -90,7 +90,8 @@ var imageInterval = setInterval(fixImages, 100);
 var replaceInnerHTML = function(node) {
   var html = node.innerHTML;
   if (css && themeId && html.indexOf(themeId) == -1) {
-    node.innerHTML = html.replace(regex, css);
+    node.innerHTML = html.replace(
+        /http:\/\/images\.neopets\.com\/css\/themes\/.{0,20}\.css/g, css);
   }
 };
 
@@ -102,7 +103,7 @@ document.addEventListener("DOMNodeInserted", function(ev) {
     if (themeId) {
       replaceInnerHTML(node);
     } else if (themeId == undefined) {
-      var currentTheme = html.match(/[0-9]{3}_[a-z0-9]*_[a-z0-9]{5}/)[0];
+      var currentTheme = html.match(regex)[0];
       chrome.runtime.sendMessage({"theme": currentTheme});
     } else {
       chrome.storage.local.get(key, function(result) {
