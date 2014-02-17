@@ -74,6 +74,14 @@ var fixImages = function(animate) {
       rotation = Math.floor(random * rotations[themeId]) + 1;
       fixSrc(footerImg, themeId, "/rotations/" + rotation + ".png");
     }
+
+    $(".nav_image img, .copyright img").each(function(i, img) {
+      var url = $(img).attr("src");
+      var match = url.match(/[0-9]{3}_[a-z0-9]*_[a-z0-9]{5}/);
+      if (match) {
+        fixSrc($(img), themeId, url.substr(match.index + match[0].length));
+      }
+    });
   }
 };
 
