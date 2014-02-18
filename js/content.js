@@ -25,6 +25,7 @@ $.getJSON(chrome.extension.getURL("data/rotations.json"), function(data) {
 
 var fixBanner = function(animate) {
   $("#ad-table").remove();
+  $("#pushdown_banner").css("pointer-events", "none");
 
   var banner = $("#ban");
   var ad = $("#ad-slug-wrapper");
