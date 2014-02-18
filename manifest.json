@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Neopets DreamTheme",
-  "description": "Allows you to use any of the official Neopets themes without having to unlock them.",
+  "description": "Use any of the official Neopets site themes and easily switch between them.",
   "version": "1.0",
 
   "permissions": [
