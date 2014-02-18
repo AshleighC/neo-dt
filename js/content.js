@@ -4,6 +4,7 @@ var regex = /[0-9]{3}_[a-z0-9]*_[a-z0-9]{5}/;
 var themeId = false;
 var css;
 var random;
+var rotations;
 
 var setVars = function(theme, newRand) {
   themeId = theme;
@@ -17,11 +18,11 @@ chrome.storage.local.get(key, function (result) {
   setVars(result[key]);
 });
 
-var rotations;
-
 $.getJSON(chrome.extension.getURL("data/rotations.json"), function(data) {
   rotations = data;
 });
+
+var imageInterval = setInterval(fixImages, 100);
 
 var fixBanner = function() {
   $("#ad-table").remove();
@@ -70,8 +71,6 @@ var fixImages = function() {
     });
   }
 };
-
-var imageInterval = setInterval(fixImages, 100);
 
 var replaceInnerHTML = function(node) {
   var html = node.innerHTML;
