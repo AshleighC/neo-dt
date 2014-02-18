@@ -33,3 +33,7 @@ The actual icon you see might be different because it reflects whichever theme y
 
 * Click on the icon to bring up the control panel. Then click on any theme to set it as your site theme! :)  
 ![](http://i.imgur.com/VdgJHaf.png)
+
+### Coming Soon
+* Ability to enable/disable the top banner
+* Compatibility with Adblock
