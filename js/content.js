@@ -24,50 +24,59 @@ $.getJSON(chrome.extension.getURL("data/rotations.json"), function(data) {
 
 var imageInterval = setInterval(fixImages, 100);
 
-var fixBanner = function() {
-  $("#ad-table").remove();
-  $("#pushdown_banner").css("pointer-events", "none");
+var fixSrc = function(img, path) {
+  img.attr("src", chrome.extension.getURL("img/themes/" + theme + path));
+};
 
+var imageFixes = {};
+
+imageFixes["banner"] = function() {
   var banner = $("#ban");
   var ad = $("#ad-slug-wrapper");
+
+  $("#ad-table").remove();
+  $("#pushdown_banner").css("pointer-events", "none");
 
   if (ad.length != 0) {
     ad.height(90);
     banner.offset({"top": 20});
-    banner.css("top", 0);
-    banner.height(theme.match("bir|sfp") ? 0 : 94);
+    banner.css({"top": 0, "height": theme.match("bir|sfp") ? 0 : 94});
   } else {
     banner.height(90);
   }
 };
 
-var fixSrc = function(img, path) {
-  img.attr("src", chrome.extension.getURL("img/themes/" + theme + path));
+imageFixes["eventIcon"] = function() {
+  var eventIcon = $(".eventIcon img");
+  var url = eventIcon.attr("src");
+  if (url) {
+    fixSrc(eventIcon, "/events" + url.substring(url.lastIndexOf("/")));
+  }
+};
+
+imageFixes["footerImage"] = function() {
+  var footerImg = $(".footerNifty");
+  if (rotations && footerImg.attr("src")) {
+    rotation = Math.floor(random * rotations[theme]) + 1;
+    fixSrc(footerImg, "/rotations/" + rotation + ".png");
+  }
+};
+
+imageFixes["navigation"] = function() {
+  $(".nav_image img, .copyright img").each(function(i, img) {
+    var url = $(img).attr("src");
+    var match = url.match(regex);
+    if (match) {
+      fixSrc($(img), url.substr(match.index + match[0].length));
+    }
+  });
 };
 
 var fixImages = function() {
   if (theme) {
-    fixBanner();
-
-    var eventIcon = $(".eventIcon img");
-    var url = eventIcon.attr("src");
-    if (url) {
-      fixSrc(eventIcon, "/events" + url.substring(url.lastIndexOf("/")));
+    for (element in imageFixes) {
+      imageFixes[element]();
     }
-
-    var footerImg = $(".footerNifty");
-    if (rotations && footerImg.attr("src")) {
-      rotation = Math.floor(random * rotations[theme]) + 1;
-      fixSrc(footerImg, "/rotations/" + rotation + ".png");
-    }
-
-    $(".nav_image img, .copyright img").each(function(i, img) {
-      var url = $(img).attr("src");
-      var match = url.match(regex);
-      if (match) {
-        fixSrc($(img), url.substr(match.index + match[0].length));
-      }
-    });
   }
 };
 
