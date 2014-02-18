@@ -29,14 +29,14 @@ var fixBanner = function(animate) {
 
   var banner = $("#ban");
   var ad = $("#ad-slug-wrapper");
-  var hide = themeId.match("bir|sfp");
 
   if (ad.length != 0) {
     ad.height(90);
     banner.offset({"top": 20});
-    banner.height(hide ? 0 : 94);
+    banner.css("top", 0);
+    banner.height(themeId.match("bir|sfp") ? 0 : 94);
   } else {
-    banner.height(hide ? 90 : 94);
+    banner.height(90);
   }
 };
 
