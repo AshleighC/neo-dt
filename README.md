@@ -36,4 +36,3 @@ The actual icon you see might be different because it reflects whichever theme y
 
 ### Coming Soon
 * Ability to enable/disable the top banner
-* Compatibility with Adblock
