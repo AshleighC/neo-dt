@@ -10,9 +10,9 @@ Neopets DreamTheme is a Chrome extension that lets you use any site theme you wa
 
 ### Getting Started
 * Close any Neopets tabs you have open.
-* Download the packaged extension.
+* Download the packaged extension by going [here](https://docs.google.com/file/d/0B1epie81RPWlMGx0Nnp5N3NUNWs/) and clicking "Download".
 * Open the Extensions page in Chrome (Menu > Tools > Extensions). (Or Menu > Settings > Extensions.)
-* Drag and drop neo-dt.crx onto this page, like so:  
+* Drag and drop neo-dt.crx onto that page, like so:  
 ![](http://i.imgur.com/FjcHC1F.png)
 
 * Wait for the following dialog to appear (sometimes it takes a few seconds). Then click "Add".  
