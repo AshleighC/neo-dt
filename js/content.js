@@ -1,15 +1,15 @@
 var key = "neo-dt";
 var regex = /[0-9]{3}_[a-z0-9]*_[a-z0-9]{5}/;
 
-var themeId = null;
+var theme = null;
 var css;
 var random;
 var rotations;
 
-var setVars = function(theme, newRand) {
-  themeId = theme;
+var setVars = function(themeId, newRandom) {
+  theme = themeId;
   css = chrome.extension.getURL("css/themes/" + theme + ".css");
-  if (newRand || (typeof random == "undefined")) {
+  if (newRandom || (typeof random == "undefined")) {
     random = Math.random();
   }
 };
@@ -35,18 +35,18 @@ var fixBanner = function() {
     ad.height(90);
     banner.offset({"top": 20});
     banner.css("top", 0);
-    banner.height(themeId.match("bir|sfp") ? 0 : 94);
+    banner.height(theme.match("bir|sfp") ? 0 : 94);
   } else {
     banner.height(90);
   }
 };
 
 var fixSrc = function(img, path) {
-  img.attr("src", chrome.extension.getURL("img/themes/" + themeId + path));
+  img.attr("src", chrome.extension.getURL("img/themes/" + theme + path));
 };
 
 var fixImages = function() {
-  if (themeId) {
+  if (theme) {
     fixBanner();
 
     var eventIcon = $(".eventIcon img");
@@ -57,7 +57,7 @@ var fixImages = function() {
 
     var footerImg = $(".footerNifty");
     if (rotations && footerImg.attr("src")) {
-      rotation = Math.floor(random * rotations[themeId]) + 1;
+      rotation = Math.floor(random * rotations[theme]) + 1;
       fixSrc(footerImg, "/rotations/" + rotation + ".png");
     }
 
@@ -73,14 +73,13 @@ var fixImages = function() {
 
 var replaceTheme = function(node) {
   var html = node.innerHTML;
-  if (themeId) {
-    if (css && !html.match(themeId)) {
+  if (theme) {
+    if (css && !html.match(theme)) {
       node.innerHTML = html.replace(
           /http:\/\/images\.neopets\.com\/css\/themes\/.{0,20}\.css/g, css);
     }
   } else {
-    var currentTheme = html.match(regex)[0];
-    chrome.runtime.sendMessage({"theme": currentTheme});
+    chrome.runtime.sendMessage({"theme": html.match(regex)[0]});
   }
 };
 
@@ -88,7 +87,7 @@ document.addEventListener("DOMNodeInserted", function(ev) {
   fixImages();
   var node = ev.relatedNode;
   if (node.localName == "head" && node.innerHTML.match("/themes/")) {
-    if (themeId === null) {
+    if (theme === null) {
       chrome.storage.local.get(key, function(result) {
         setVars(result[key]);
         replaceTheme(node);
@@ -103,8 +102,8 @@ $(document).ready(function() {
   clearInterval(imageInterval);
 });
 
-chrome.runtime.onMessage.addListener(function(theme, sender, sendResponse) {
-  setVars(theme, true);
+chrome.runtime.onMessage.addListener(function(themeId, sender, sendResponse) {
+  setVars(themeId, true);
   $("link").each(function(i, stylesheet) {
     var url = $(stylesheet).attr("href");
     if (url && url.indexOf("themes") > 0) {
