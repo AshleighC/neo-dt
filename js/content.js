@@ -1,7 +1,7 @@
 var key = "neo-dt";
 var regex = /[0-9]{3}_[a-z0-9]*_[a-z0-9]{5}/;
 
-var themeId = false;
+var themeId = null;
 var css;
 var random;
 var rotations;
@@ -41,8 +41,8 @@ var fixBanner = function() {
   }
 };
 
-var fixSrc = function(img, theme, path) {
-  img.attr("src", chrome.extension.getURL("img/themes/" + theme + path));
+var fixSrc = function(img, path) {
+  img.attr("src", chrome.extension.getURL("img/themes/" + themeId + path));
 };
 
 var fixImages = function() {
@@ -52,49 +52,49 @@ var fixImages = function() {
     var eventIcon = $(".eventIcon img");
     var url = eventIcon.attr("src");
     if (url) {
-      fixSrc(eventIcon, themeId, "/events" +
-          url.substring(url.lastIndexOf("/")));
+      fixSrc(eventIcon, "/events" + url.substring(url.lastIndexOf("/")));
     }
 
     var footerImg = $(".footerNifty");
     if (rotations && footerImg.attr("src")) {
       rotation = Math.floor(random * rotations[themeId]) + 1;
-      fixSrc(footerImg, themeId, "/rotations/" + rotation + ".png");
+      fixSrc(footerImg, "/rotations/" + rotation + ".png");
     }
 
     $(".nav_image img, .copyright img").each(function(i, img) {
       var url = $(img).attr("src");
       var match = url.match(regex);
       if (match) {
-        fixSrc($(img), themeId, url.substr(match.index + match[0].length));
+        fixSrc($(img), url.substr(match.index + match[0].length));
       }
     });
   }
 };
 
-var replaceInnerHTML = function(node) {
+var replaceTheme = function(node) {
   var html = node.innerHTML;
-  if (css && themeId && html.indexOf(themeId) == -1) {
-    node.innerHTML = html.replace(
-        /http:\/\/images\.neopets\.com\/css\/themes\/.{0,20}\.css/g, css);
+  if (themeId) {
+    if (css && !html.match(themeId)) {
+      node.innerHTML = html.replace(
+          /http:\/\/images\.neopets\.com\/css\/themes\/.{0,20}\.css/g, css);
+    }
+  } else {
+    var currentTheme = html.match(regex)[0];
+    chrome.runtime.sendMessage({"theme": currentTheme});
   }
 };
 
 document.addEventListener("DOMNodeInserted", function(ev) {
   fixImages();
   var node = ev.relatedNode;
-  var html = node.innerHTML;
-  if ((node.localName == "head") && (html.indexOf("/themes/") != -1)) {
-    if (themeId) {
-      replaceInnerHTML(node);
-    } else if (themeId == undefined) {
-      var currentTheme = html.match(regex)[0];
-      chrome.runtime.sendMessage({"theme": currentTheme});
-    } else {
+  if (node.localName == "head" && node.innerHTML.match("/themes/")) {
+    if (themeId === null) {
       chrome.storage.local.get(key, function(result) {
         setVars(result[key]);
-        replaceInnerHTML(node);
+        replaceTheme(node);
       });
+    } else {
+      replaceTheme(node);
     }
   }
 }, false);
