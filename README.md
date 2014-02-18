@@ -1,4 +1,4 @@
-## Neopets DreamTheme
+## Neopets DreamTheme ![](http://i.imgur.com/CaRRqQo.png)
 
 Neopets DreamTheme is a Chrome extension that lets you use any site theme you want on Neopets.
 
