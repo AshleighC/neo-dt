@@ -2,12 +2,13 @@ var key = "neo-dt";
 var regex = /[0-9]{3}_[a-z0-9]*_[a-z0-9]{5}/;
 
 var theme = null;
-var css;
-var random;
-var rotations;
 
 var imageFixes = {};
 var imageInterval = setInterval(fixImages, 100);
+
+var css;
+var random;
+var rotations;
 
 var setVars = function(themeId, newRandom) {
   theme = themeId;
@@ -36,7 +37,7 @@ var replaceTheme = function(node) {
   if (theme) {
     if (css && !html.match(theme)) {
       node.innerHTML = html.replace(
-          /http:\/\/images\.neopets\.com\/css\/themes\/.{0,20}\.css/g, css);
+          /http:\/\/images\.neopets\.com\/css\/themes\/.{0,20}\.css/, css);
     }
   } else {
     chrome.runtime.sendMessage({"theme": html.match(regex)[0]});
@@ -117,14 +118,14 @@ $(document).ready(function() {
   clearInterval(imageInterval);
 });
 
-chrome.runtime.onMessage.addListener(function(themeId, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function(themeId) {
   setVars(themeId, true);
   fixImages();
 
   $("link").each(function(i, stylesheet) {
     var url = $(stylesheet).attr("href");
 
-    if (url && url.indexOf("themes") > 0) {
+    if (url && url.match("themes")) {
       $(stylesheet).attr("href", css);
     }
   });

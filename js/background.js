@@ -10,7 +10,7 @@ var setIcon = function(tabId, themeId) {
 };
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-  if (tab.url.indexOf(".neopets.com") >= 0) {
+  if (tab.url.match(/\.neopets.com/)) {
     chrome.storage.local.get(key, function(result) {
       if (!$.isEmptyObject(result)) {
         setIcon(tabId, result[key]);
