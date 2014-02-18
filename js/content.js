@@ -28,29 +28,14 @@ var fixBanner = function(animate) {
 
   var banner = $("#ban");
   var ad = $("#ad-slug-wrapper");
+  var hide = themeId.match("bir|sfp");
 
-  if (themeId.match("bir|sfp")) {
-    if (animate) {
-      banner.animate({"height": "90px"}, {
-        "start": function() {
-          ad.animate({"height": "0px"});
-        }
-      });
-    } else {
-      banner.css({"height": "90px"});
-      ad.css({"height": "0px"});
-    }
+  if (ad.length != 0) {
+    ad.height(90);
+    banner.offset({"top": 20});
+    banner.height(hide ? 0 : 94);
   } else {
-    if (animate) {
-      ad.animate({"height": "90px"}, {
-        "start": function() {
-          banner.animate({"height": "94px"});
-        }
-      });
-    } else {
-      ad.css({"height": "90px"});
-      banner.css({"height": "94px"});
-    }
+    banner.height(hide ? 90 : 94);
   }
 };
 
