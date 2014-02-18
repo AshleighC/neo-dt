@@ -23,7 +23,7 @@ $.getJSON(chrome.extension.getURL("data/rotations.json"), function(data) {
   rotations = data;
 });
 
-var fixBanner = function(animate) {
+var fixBanner = function() {
   $("#ad-table").remove();
   $("#pushdown_banner").css("pointer-events", "none");
 
@@ -44,9 +44,9 @@ var fixSrc = function(img, theme, path) {
   img.attr("src", chrome.extension.getURL("img/themes/" + theme + path));
 };
 
-var fixImages = function(animate) {
+var fixImages = function() {
   if (themeId) {
-    fixBanner(animate);
+    fixBanner();
 
     var eventIcon = $(".eventIcon img");
     var url = eventIcon.attr("src");
@@ -111,6 +111,6 @@ chrome.runtime.onMessage.addListener(function(theme, sender, sendResponse) {
     if (url && url.indexOf("themes") > 0) {
       $(stylesheet).attr("href", css);
     }
-    fixImages(true);
+    fixImages();
   });
 });
