@@ -89,6 +89,7 @@ navigation=(
   contactus
   aboutus
   referral
+  linktous
   help
   ad-choices
   follow-us-on
