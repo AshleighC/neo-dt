@@ -54,17 +54,13 @@ $.getJSON(chrome.extension.getURL("data/rotations.json"), function(data) {
 
 imageFixes["banner"] = function() {
   var banner = $("#ban");
-  var ad = $("#ad-slug-wrapper");
 
   $("#ad-table").remove();
   $("#pushdown_banner").css("pointer-events", "none");
 
-  if (ad.length != 0) {
-    ad.height(90);
+  if ($("#ad-slug-wrapper").length != 0) {
     banner.offset({"top": 20});
     banner.css({"top": 0, "height": theme.match("bir|sfp") ? 0 : 94});
-  } else {
-    banner.height(90);
   }
 };
 

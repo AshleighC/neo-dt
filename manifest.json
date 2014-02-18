@@ -3,7 +3,7 @@
 
   "name": "Neopets DreamTheme",
   "description": "Use any of the official Neopets site themes and easily switch between them.",
-  "version": "1.0",
+  "version": "1.0.1",
 
   "permissions": [
     "storage",
@@ -28,6 +28,9 @@
       "js": [
         "js/jquery.js",
         "js/content.js"
+      ],
+      "css": [
+        "css/content.css"
       ],
       "run_at": "document_start",
       "all_frames": true
