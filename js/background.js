@@ -29,6 +29,13 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
   });
 });
 
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.method == "getTopBannerOption")
+      sendResponse({data: localStorage["enable_top_banner"]});
+    else
+      sendResponse({}); // snub them.
+});
+
 chrome.runtime.onMessage.addListener(function(message, sender) {
   setIcon(sender.tab.id, message.theme);
   var change = {};
