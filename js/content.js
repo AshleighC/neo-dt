@@ -93,6 +93,18 @@ imageFixes["navigation"] = function() {
   });
 };
 
+imageFixes["topBanner"] = function() {
+  chrome.runtime.sendMessage({method: "getTopBannerOption"}, function(response) {
+    var enableTopBanner = response["data"];
+    if (!enableTopBanner) {
+      return;
+    }
+    if(!JSON.parse(enableTopBanner)) {
+      $("#ban").hide();
+    }
+  });
+}
+
 document.addEventListener("DOMNodeInserted", function(ev) {
   var node = ev.relatedNode;
 
