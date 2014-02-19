@@ -1,4 +1,5 @@
 var key = "neo-dt";
+var bannerkey = "hide-top-banner";
 var theme;
 
 var select = function(id, animate) {
@@ -54,5 +55,17 @@ chrome.storage.local.get(key, function (result) {
         chrome.storage.local.set(change);
       }
     });
+  });
+});
+
+chrome.storage.local.get(bannerkey, function (result) {
+  if (!$.isEmptyObject(result)) {
+    $("#hidetopbanner").attr("checked", result[bannerkey]);
+  }
+
+  $("#hidetopbanner").change(function() {
+    var hide = {};
+    hide[bannerkey] = $(this).is(":checked");
+    chrome.storage.local.set(hide);
   });
 });

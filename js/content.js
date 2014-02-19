@@ -1,4 +1,5 @@
 var key = "neo-dt";
+var bannerkey = "hide-top-banner";
 var regex = /[0-9]{3}_[a-z0-9]*_[a-z0-9]{5}/;
 
 var theme = null;
@@ -54,6 +55,12 @@ $.getJSON(chrome.extension.getURL("data/rotations.json"), function(data) {
 
 imageFixes["banner"] = function() {
   var banner = $("#ban");
+
+  chrome.storage.local.get(bannerkey, function (result) {
+    if (!$.isEmptyObject(result) && result[bannerkey] == true) {
+      banner.hide();
+    }
+  });
 
   $("#ad-table").remove();
   $("#pushdown_banner").css("pointer-events", "none");
