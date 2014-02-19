@@ -1,4 +1,5 @@
 var key = "neo-dt";
+var bannerkey = "hide-top-banner";
 var regex = /[0-9]{3}_[a-z0-9]*_[a-z0-9]{5}/;
 
 var theme = null;
@@ -55,13 +56,26 @@ $.getJSON(chrome.extension.getURL("data/rotations.json"), function(data) {
 imageFixes["banner"] = function() {
   var banner = $("#ban");
 
-  $("#ad-table").remove();
-  $("#pushdown_banner").css("pointer-events", "none");
+  chrome.storage.local.get(bannerkey, function (result) {
+    if (!$.isEmptyObject(result) && result[bannerkey] == true && $("#ad-slug-wrapper").length > 0) {
+      $(".slug").hide();
+      $("#ad-slug-wrapper").hide();
+      $("#pushdown_banner").css({"pointer-events": "none", "max-height": "90px"});
+      banner.css({"min-height": "88px", "height": ""});
 
-  if ($("#ad-slug-wrapper").length != 0) {
-    banner.offset({"top": 20});
-    banner.css({"top": 0, "height": theme.match("bir|sfp") ? 0 : 94});
-  }
+      // space faerie & birthday themes are weird
+      if (theme.match("bir|sfp")) {
+        banner.height(88);
+      }
+    } else if (!$("#ad-slug-wrapper").length) {
+      // workaround for userlookups & pages with no top banner for space faerie & birthday themes
+      if (theme.match("sfp")) {
+        banner.height(90);
+      } else if (theme.match("bir")) {
+        banner.height(88);
+      }
+    }
+  });
 };
 
 imageFixes["eventIcon"] = function() {
